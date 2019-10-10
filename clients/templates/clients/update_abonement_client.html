@@ -1,0 +1,36 @@
+
+{% load forfaits_extras %}
+<div class="container modal-part" id='abonnement-abonnement'>
+  <h5 class='text-night'> <i class='fa fa-user'></i> Prolonger Abonement</h5>
+  <form action="{% url 'update_abonnement' client.id %}" method='post'>
+      {%csrf_token%}
+      <input type="hidden" name='abonnement-client' value={{client.id}}>
+      <input type="hidden" name='abonnement-caisse' value={{caisseday.id}}>
+    <div class="row">
+      <div class="col-md">
+        <label for="">Forfait</label>
+        {{abonnement_form.forfait|add_class:"form-control"}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <label for="">remise:</label>
+        {{abonnement_form.remise|add_class:"form-control"}}
+      </div>
+      <div class="col-md">
+        <label for="">Total:</label>
+        {{abonnement_form.montant|add_class:"form-control"}}
+      </div>
+      <div class="col-md">
+        <label for="">Versement:</label>
+        {{abonnement_form.versement|add_class:"form-control"}}
+      </div>
+
+    </div>
+    <div class="text-right my-3">
+      <b class='text-white  btn rounded shadow  bg-night' data-dismiss="modal">Fermer</b>
+      <button type='submit' class='text-white  btn rounded shadow  bg-success'>Sauvgarder</button>
+
+    </div>
+  </form>
+</div>

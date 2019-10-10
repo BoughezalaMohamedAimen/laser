@@ -1,0 +1,51 @@
+{%load static %}
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+
+<h5 class="p-1 bg-info my-1 text-white">Payments </h5>
+<table class="table table-bordered table-hover">
+  <thead style='font-size:14px !important;'>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">forfait</th>
+      <th scope="col">total</th>
+      <th scope="col">Versement</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for historique_payements in historiques_payements %}
+    <tr style='font-size:14px !important;' class='py-0'>
+      <th scope="row" class='py-0'>{{historique_payements.date_heure|date:"D d M Y"}}</th>
+      <td class='nom' class='py-0'>{{historique_payements.forfait.nom}}</td>
+      <td class='nom' class='py-0'>{{historique_payements.montant}}</td>
+      <td class='nom' class='py-0'>
+        {{historique_payements.versement}}
+        {% if forloop.first %}
+        <a href="{% url 'delete_abonnement' historique_payements.id %}" class="badge bg-night text-white">Suprimmer</a>
+        {% endif%}
+      </td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="text-center">
+<div class="pagination">
+<span class="step-links">
+{% if historique_payements.has_previous %}
+<a href="/client/historique/{{historique_payements.0.id}}?page=1" class='btn bg-info text-white paginator'>1</a>
+<a href="/client/historique/{{historique_payements.0.id}}?page={{ historique_payements.previous_page_number }}" class='btn bg-info text-white paginator'> < </a>
+{% endif %}
+
+<span class="current">
+Page {{ historique_payements.number }} sur {{ historique_payements.paginator.num_pages }}.
+</span>
+
+{% if historique_payements.has_next %}
+<a href="/client/historique/{{historique_payements.0.client.id}}?page={{ historique_payements.next_page_number }}" class='btn bg-info text-white paginator-historique'> > </a>
+<a href="/client/historique/{{historique_payements.0.client.id}}?page={{ historique_payements.paginator.num_pages }}" class='btn bg-info text-white paginator-historique'>{{ historique_payements.paginator.num_pages }}</a>
+{% endif %}
+</span>
+</div>
+</div>

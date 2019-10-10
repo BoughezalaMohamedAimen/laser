@@ -1,0 +1,56 @@
+{% load forfaits_extras %}
+{% load static %}
+{% load humanize %}
+
+<div class="modal-header">
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h5 class="modal-title modal-navigate" data-show="#caisse-form-update"><i class='fa fa-info-circle text-night'></i> {{caisse.date}} </h5>
+      <small>Férmeture prévu <b class="text-night">{{caisse.fermeture_prevu|intcomma}} Da</b></small>
+    </div>
+    <div class="col-md text-right mt-2">
+      <b class="text-white  btn rounded shadow  bg-night modal-navigate" data-show='#historique-historique-caisse'> <small><i class='fa fa-clock'></i> Historique</small></b>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body ">
+    <div class="container-fluid modal-part" id='historique-historique-caisse'>
+        {% include 'caisse/caisse_historique.html' %}
+          <iframe src="{% url 'historique_seance_libre_page_num' caisse.id %}" frameborder="0" class='w-100' height="300px" ></iframe>
+    </div>
+  <div class="container modal-part" id='caisse-form-update'>
+    <form  method='post'  class='update-client-form' action="{% url 'update_caisse' caisse.id %}">
+        {{form.errors}}
+        {%csrf_token%}
+        <div class="row">
+          <div class=" col-md py-2">
+            <label  class="text-secondary">Ouverture :</label>
+            {{form_update.ouverture|add_class:"form-control"}}
+
+          </div>
+          <div class=" col-md py-2">
+            <label  class="text-secondary">Fermeture:</label>
+            {{form_update.fermeture|add_class:"form-control"}}
+          </div>
+          <div class=" col-md py-2">
+            <br>
+            <button type='submit' class='text-white  btn rounded shadow  bg-success'>Sauvgarder</button>
+          </div>
+
+        </div>
+
+      </form>
+  </div>
+
+
+</div>
+<div class="modal-footer">
+
+</div>

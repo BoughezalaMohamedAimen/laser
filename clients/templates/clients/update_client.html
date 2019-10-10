@@ -1,0 +1,104 @@
+{% load forfaits_extras %}
+{% load static %}
+{% load humanize %}
+
+<div class="modal-header">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h5 class="modal-title modal-navigate" data-show="#client-form-update"><i class='fa fa-info-circle text-night'></i> {{client.prenom}} {{client.nom}} </h5>
+      <small>Dérniere séance <b class="text-night">{{last_seance.date_heure|naturaltime}}</b></small>
+    </div>
+    <div class="col-md text-right mt-2">
+      <b class="text-white  btn rounded shadow  bg-info modal-navigate" data-show='#abonnement-abonnement'> <small><i class='fa fa-user-circle'></i> Abonnement</small></b>
+      <b class="text-white  btn rounded shadow  bg-night modal-navigate" data-show='#historique-historique'> <small><i class='fa fa-clock'></i> Historique</small></b>
+      <b class="text-white marquer-seance btn rounded shadow  bg-success"> <small><i class='fa fa-angle-right'></i> Nouvelle Séance</small></b>
+      <input type="number" class="form-control-sm d-inline-block" style='width: 50px;' value='01' id='suplaimentaire' max="{{client.seance}}">
+    </div>
+  </div>
+</div>
+
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body ">
+
+
+
+  <div class="container-fluid modal-part" id='historique-historique'>
+    <iframe src="{% url 'historique_page_num' client.id %}" frameborder="0" class='w-100' height="300px" id='presence'></iframe>
+    <iframe src="{% url 'historique_payment_page_num' client.id %}" frameborder="0" class='w-100' height="500px"></iframe>
+  </div>
+
+{% include 'clients/update_abonement_client.html' %}
+
+
+
+  <div class="container modal-part" id='client-form-update'>
+    <span class='client-id-hidden d-none'>{{client.id}}</span>
+      <h4 class="bg-night text-white">{{form_update.errors}}</h4>
+    <div class="container">
+      <form  method='post' enctype="multipart/form-data" class='update-client-form' action="{% url 'update_clients' client.id %}">
+          {%csrf_token%}
+          <div class="row">
+              <div class="row">
+                <div class="col-md py-2">
+                  <label  class="text-secondary">Nom:</label>
+                  {{form_update.nom|add_class:"form-control"}}
+                </div>
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">Prénom:</label>
+                  {{form_update.prenom|add_class:"form-control"}}
+                </div>
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">telephone:</label>
+                  {{form_update.telephone|add_class:"form-control"}}
+                </div>
+              </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class=" col-md-4 py-2">
+              <label  class="text-secondary">E-mail:</label>
+              {{form_update.email|add_class:"form-control"}}
+            </div>
+            <div class="col-md-4 py-2">
+              <label  class="text-secondary">rfid:</label>
+              {{form_update.rfid|add_class:"form-control"}}
+            </div>
+            <div class=" col-md py-2">
+              <label  class="text-secondary">seance:</label>
+              {{form_update.seance|add_class:"form-control"}}
+            </div>
+          </div>
+
+
+
+          <div class="row rounded">
+            <div class="col-md-12">
+              <h3 class='text-center'>{{client.forfait}}</h3>
+            </div>
+          </div>
+
+
+
+          <div class="text-right">
+            <b class='text-white  btn rounded shadow  bg-night' data-dismiss="modal">Fermer</b>
+            <button type='submit' class='text-white  btn rounded shadow  bg-success'>Sauvgarder</button>
+
+          </div>
+</form>
+    </div>
+  </div>
+
+
+
+
+</div>
+<div class="modal-footer">
+
+</div>

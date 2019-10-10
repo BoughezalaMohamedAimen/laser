@@ -1,0 +1,93 @@
+{% extends 'base.html'%}
+{% block title%} Forfaits {% endblock title%}
+{% load static %}
+{% load forfaits_extras %}
+{% block styles%}
+
+
+ {% endblock styles%}
+{% block body%}
+<div class="container my-3" style='background: rgba(255,255,255,.5);border-radius:50px'>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="p-3 bg-night my-3 text-white" style='border-radius:25px'>Liste Forfaits</h3>
+      <table class="table table-bordered table-hover  text-white">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Séances</th>
+            <th scope="col">Prix</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for forfait in forfaits %}
+          <tr data-toggle="modal" data-target="#exampleModalCenter" class='forfait-row'>
+            <th scope="row" class='id'>{{forfait.id}}</th>
+            <td class='nom'>{{forfait.nom}}</td>
+            <td class='nbr_seance'>{{forfait.nbr_seance}}</td>
+            <td class='prix'>{{forfait.prix}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md">
+      {% include 'forfaits/add_forfait.html' %}
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <form method="post" id='update'>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modifier Forfait</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          {% csrf_token %}
+          <div class="container py-3">
+            <div class="row">
+              <div class="col-md-4">
+                <label  class="text-secondary">Nom</label>
+                {{form_update.nom|add_class:"form-control"}}
+              </div>
+              <div class="col-md-4">
+                <label  class="text-secondary">Séance <small>mois</small></label>
+                {{form_update.nbr_seance|add_class:"form-control"}}
+              </div>
+              <div class="col-md-4">
+                <label  class="text-secondary">Prix</label>
+                {{form_update.prix|add_class:"form-control"}}
+              </div>
+            </div>
+          </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button-night" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="button-day">Sauvgarder</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock body%}
+
+
+
+{% block scripts%}
+  <script src="{% static '/js/main-forfait.js' %}"></script>
+ {% endblock scripts%}

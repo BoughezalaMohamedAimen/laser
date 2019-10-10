@@ -1,0 +1,137 @@
+{% load forfaits_extras %}
+{% load static %}
+{% load humanize %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h5 class="modal-title modal-navigate" data-show="#client-form-update"><i class='fa fa-info-circle text-night'></i> {{client.prenom}} {{client.nom}} </h5>
+      <small>Dérniere séance <b class="text-night">{{last_seance.date_heure|naturaltime}}</b></small>
+    </div>
+    <div class="col-md text-right mt-2">
+      <b class="text-white marquer-seance btn rounded shadow  bg-success"> <small><i class='fa fa-angle-right'></i> Nouvelle Séance</small></b>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+  <div class="container-fluid modal-part" id='historique-historique'>
+    <iframe src="{% url 'historique_page_num' client.id %}" frameborder="0" class='w-100' height="300px" id='presence'></iframe>
+    <iframe src="{% url 'historique_payment_page_num' client.id %}" frameborder="0" class='w-100' height="500px"></iframe>
+  </div>
+
+{% include 'clients/update_abonement_client.html' %}
+
+
+
+
+  <div class="container modal-part" id='client-form-update'>
+    <span class='client-id-hidden d-none'>{{client.id}}</span>
+      <h4 class="bg-night text-white">{{form_update.errors}}</h4>
+    <div class="container">
+      <form  method='post' enctype="multipart/form-data" class='update-client-form' action="{% url 'update_clients' client.id %}">
+          {%csrf_token%}
+          <div class="row">
+            <div class="col-md-3">
+              <img src="{% if form_update.photo.value %}/media/{{form_update.photo.value}}{%else%}{% static '/img/profile.png'%}{%endif%}" alt="" class="img-fluid">
+            </div>
+            <div class="col-md">
+
+              <div class="row">
+                <div class="col-md py-2">
+                  <label  class="text-secondary">Nom:</label>
+                  {{form_update.nom|add_class:"form-control"}}
+                </div>
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">Prénom:</label>
+                  {{form_update.prenom|add_class:"form-control"}}
+                </div>
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">sex:</label>
+                  {{form_update.sex|add_class:"form-control"}}
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">Date Naissance:</label>
+                  {{form_update.date_naissance|add_class:"form-control datepicker"}}
+                </div>
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">Adresse:</label>
+                  {{form_update.adresse|add_class:"form-control"}}
+                </div>
+                <div class=" col-md py-2">
+                  <label  class="text-secondary">telephone:</label>
+                  {{form_update.telephone|add_class:"form-control"}}
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class=" col-md py-2">
+              <label  class="text-secondary">Telephone d'urgence:</label>
+              {{form_update.telephone_urgence|add_class:"form-control"}}
+            </div>
+            <div class=" col-md py-2">
+              <label  class="text-secondary">E-mail:</label>
+              {{form_update.email|add_class:"form-control"}}
+            </div>
+            <div class="col-md py-2">
+              <label  class="text-secondary">rfid:</label>
+              {{form_update.rfid|add_class:"form-control"}}
+            </div>
+          </div>
+
+
+
+          <div class="row" style='background: rgba(50,180,100,.5);'>
+            <div class=" col-md py-2">
+              <label  class="text-secondary">seance:</label>
+              {{form_update.seance|add_class:"form-control"}}
+            </div>
+            <div class=" col-md py-2">
+              <label  class="text-secondary">Date debut:</label>
+              {{form_update.date_debut|add_class:"form-control datepicker"}}
+            </div>
+            <div class=" col-md py-2">
+              <label  class="text-secondary">Date fin:</label>
+              {{form_update.date_fin|add_class:"form-control datepicker"}}
+            </div>
+          </div>
+
+
+          <div class="row">
+
+          </div>
+
+          <div class="row">
+            <div class=" col-md py-2 photo-input-wrapper">
+              <label  class="text-secondary photo-label">Photo:</label>
+              {{form_update.photo|add_class:"form-control"}}
+            </div>
+            <div class=" col-md py-2">
+              <label  class="text-secondary">Solde:</label>
+              {{form_update.credit|add_class:"form-control"}}
+            </div>
+          </div>
+          <div class="text-right">
+            <b class='text-white  btn rounded shadow  bg-night' data-dismiss="modal">Fermer</b>
+            <button type='submit' class='text-white  btn rounded shadow  bg-success'>Sauvgarder</button>
+
+          </div>
+</form>
+    </div>
+  </div>

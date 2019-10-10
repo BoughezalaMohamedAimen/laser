@@ -1,0 +1,21 @@
+<h5 class="p-2 bg-info my-3 text-white">Liste Abonnement</h5>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">heure</th>
+      <th scope="col">client</th>
+      <th scope="col">total</th>
+      <th scope="col">versement</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for abonnement in caisse.abonnement_set.all %}
+    <tr>
+      <th scope="row" class='id'>{{abonnement.date_heure}}</th>
+      <td class='nbr_seance'>{{abonnement.client}}</td>
+      <td class='nom'>{{abonnement.montant}}</td>
+      <td class='nbr_seance'>{{abonnement.versement}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

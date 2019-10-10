@@ -1,0 +1,28 @@
+{% load forfaits_extras %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 m-3 border">
+      <h3 class='py-3 text-center'>Ajouter un  Forfait</h3>
+      <form  method='post'>
+        {%csrf_token%}
+          <div class="py-2">
+            <label  class="text-white">Nom du forfait</label>
+            {{form.nom|add_class:"form-control"}}
+          </div>
+          <div class="py-2">
+            <label  class="text-white">Nombre de parties:</label>
+            {{form.nbr_seance|add_class:"form-control"}}
+          </div>
+          <div class="py-2">
+            <label  class="text-white">Prix:</label>
+            {{form.prix|add_class:"form-control"}}
+          </div>
+          <div class="py-3 text-center">
+            <button type='submit' class='button-night'>AJOUTER</button>
+          </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>

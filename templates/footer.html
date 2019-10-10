@@ -1,0 +1,46 @@
+<!-- Modal update-client -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id='modal'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content client-info">
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal add-client -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id='modaladd'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form  method='post' enctype="multipart/form-data" action="{%url 'home_clients'%}">
+      <div class="modal-header">
+        <h5 class="modal-title" > <i class='fa fa-user-plus text-night'></i> Ajouter Client</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+    {% include 'clients/add_client.html'%}
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button-night" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="button-day">Sauvgarder</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+{% block title%} Caisses {% endblock title%}
+{% load static %}
+{% load forfaits_extras %}
+{% block styles%}
+
+
+ {% endblock styles%}
+{% block body%}
+<div class="container my-3 py-2" style='background: rgba(255,255,255,.5);border-radius:50px'>
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <h3 class="p-3 bg-night my-3 text-white" style='border-radius:25px'>Liste Caisses</h3>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Ouverture</th>
+            <th scope="col">Fermeture</th>
+            <th scope="col">Fermeture Prévue</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for caisse in caisses %}
+          <tr data-toggle="modal" data-target="#caisseModal" class='caisse-row' data-id='{{caisse.id}}'>
+            <th scope="row" class='id'>{{caisse.id}}</th>
+            <td class='nom'>{{caisse.date}}</td>
+            <td class='nbr_seance'>{{caisse.ouverture}}</td>
+            <td class='prix'>{{caisse.fermeture}}</td>
+            <td class='prix'>{{caisse.fermeture_prevu}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md">
+
+    </div>
+  </div>
+
+  <div class="text-center">
+    <div class="pagination">
+  <span class="step-links">
+  {% if caisses.has_previous %}
+      <a href="?page=1" class='btn bg-info text-white paginator'>1</a>
+      <a href="?page={{ caisses.previous_page_number }}" class='btn bg-info text-white paginator'> < </a>
+  {% endif %}
+
+  <span class="current">
+      Page {{ caisses.number }} sur {{ caisses.paginator.num_pages }}.
+  </span>
+
+  {% if caisses.has_next %}
+      <a href="?page={{ caisses.next_page_number }}" class='btn bg-info text-white paginator'> > </a>
+      <a href="?page={{ caisses.paginator.num_pages }}" class='btn bg-info text-white paginator'>{{ caisses.paginator.num_pages }}</a>
+  {% endif %}
+  </span>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id='caisseModal'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content caisse-info">
+
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock body%}
+
+
+
+{% block scripts%}
+  <script src="{% static '/js/main-caisse.js' %}"></script>
+ {% endblock scripts%}

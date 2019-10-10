@@ -1,0 +1,37 @@
+@import 'colors.css';
+.search-input
+{
+  padding:9px;
+  border:0;
+  background: rgba(255, 255, 255, .4);
+  -webkit-transition: .5s all;
+  -o-transition: .5s all;
+  transition: .5s all;
+}
+.search-input:focus
+{
+  background: rgba(255, 255, 255, .8);
+  border-radius: 0 !important
+}
+
+.search-icon
+{
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left:10px;
+  font-size: 20px
+}
+.font-30
+{
+  font-size: 30px
+}
+.body
+{
+  background: url('../img/fond.png');
+  -webkit-background-size: cover;
+  background-size: cover;
+}

@@ -1,0 +1,39 @@
+.bg-night{  background: rgba(133, 20, 75, .6);}
+.text-night{  color: #85144b;}
+.modal .bg-night{  background: rgba(133, 20, 75, 1);}
+.bg-day{  background: rgba(176,224,230,.5);}
+.text-day{  color: powderblue;}
+
+.button-night
+{
+  background: #85144b;
+  border: 2px solid #85144b;
+  -webkit-transition: .5s all;
+  -o-transition: .5s all;
+  transition: .5s all;
+  color:white;
+  display: inline-block;
+  padding: 7.5px 10px;
+}
+.button-night:hover
+{
+  background: transparent;
+  color: #85144b !important;
+}
+
+.button-day
+{
+  background: green;
+  border: 2px solid green;
+  -webkit-transition: .5s all;
+  -o-transition: .5s all;
+  transition: .5s all;
+  color:white;
+  display: inline-block;
+  padding: 7.5px 10px;
+}
+.button-day:hover
+{
+  background: transparent;
+  color: green !important;
+}

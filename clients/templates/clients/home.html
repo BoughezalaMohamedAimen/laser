@@ -1,0 +1,78 @@
+{% extends 'base.html'%}
+{% block title%} Clients {% endblock title%}
+{% load static %}
+{% load forfaits_extras %}
+{% block styles%}
+
+
+ {% endblock styles%}
+{% block body%}
+
+<div class="container-fluid py-3 mt-2" style='background: rgba(255,255,255,.5);border-radius:50px'>
+
+
+
+      <h3 class="p-3 bg-night my-3 text-white"  data-toggle="collapse" href="#listeclient" role="button" aria-expanded="false" aria-controls="listeclient">Liste Clients</h3>
+      <div  id='listeclient'>
+        <table class="table table-bordered table-hover text-white">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Prénom</th>
+              <th scope="col">Telephone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Séance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for client in clients %}
+            <tr data-toggle="modal" data-target="#modal" data-id={{client.id}} class='client-row'>
+              <th scope="row" class='id'>{{client.id}}</th>
+              <td class='nom'>{{client.nom}}</td>
+              <td class='nom'>{{client.prenom}}</td>
+              <td class='nom'>{{client.telephone}}</td>
+              <td class='nom'>{{client.email}}</td>
+              <td class='nbr_seance'>{{client.seance}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+  <div class="text-center pl-3">
+    <div class="pagination">
+  <span class="step-links">
+  {% if clients.has_previous %}
+      <a href="?page=1" class='btn bg-day text-white paginator'>1</a>
+      <a href="?page={{ clients.previous_page_number }}" class='btn bg-day text-white paginator'> < </a>
+  {% endif %}
+
+  <span class="current">
+      Page {{ clients.number }} sur {{ clients.paginator.num_pages }}.
+  </span>
+
+  {% if clients.has_next %}
+      <a href="?page={{ clients.next_page_number }}" class='btn bg-day text-white paginator'> > </a>
+      <a href="?page={{ clients.paginator.num_pages }}" class='btn bg-day text-white paginator'>{{ clients.paginator.num_pages }}</a>
+  {% endif %}
+  </span>
+  </div>
+  </div>
+
+      </div>
+
+
+</div>
+
+
+
+
+
+
+{% endblock body%}
+
+
+
+{% block scripts%}
+<script src="{%static 'js/main-client.js' %}"></script>
+ {% endblock scripts%}

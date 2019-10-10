@@ -1,0 +1,39 @@
+{% load forfaits_extras %}
+<div class="container">
+
+      <h4 class="bg-night text-white">{{AddClientForm.errors}}</h4>
+        {%csrf_token%}
+
+
+        <div class="row">
+          <div class="col-md py-2">
+            <label  class="text-secondary">Nom:</label>
+            {{AddClientForm.nom|add_class:"form-control"}}
+          </div>
+          <div class=" col-md py-2">
+            <label  class="text-secondary">Prénom:</label>
+            {{AddClientForm.prenom|add_class:"form-control"}}
+          </div>
+          <div class=" col-md py-2">
+            <label  class="text-secondary">telephone:</label>
+            {{AddClientForm.telephone|add_class:"form-control"}}
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class=" col-md py-2">
+            <label  class="text-secondary">E-mail:</label>
+            {{AddClientForm.email|add_class:"form-control"}}
+          </div>
+          <div class=" col-md py-2">
+            <label  class="text-secondary">Séances:</label>
+            {{AddClientForm.seance|add_class:"form-control"}}
+          </div>
+          <div class="col-md py-2">
+            <label  class="text-secondary">rfid:</label>
+            {{AddClientForm.rfid|add_class:"form-control "}}
+          </div>
+        </div>
+
+</div>

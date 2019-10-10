@@ -1,0 +1,44 @@
+{%load static %}
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+
+<hr>
+<h5 class="p-1 bg-info my-1 text-white">Séance Libre </h5>
+<table class="table table-bordered table-hover">
+  <thead style='font-size:14px !important;'>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Heure</th>
+      <th scope="col">Versement</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for historique in historiques %}
+    <tr style='font-size:14px !important;' class='py-0'>
+      <th scope="row" class='py-0'>{{historique.date_heure|date:"D d M Y"}}</th>
+      <td class='nom' class='py-0'>{{historique.date_heure|time:"H:i"}}</td>
+      <td class='nom' class='py-0'>      <a href="{% url 'suprimmer_seance_clients' historique.id %}" class="badge bg-night text-white">Anuller</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="text-center">
+<div class="pagination">
+<span class="step-links">
+{% if historiques.has_previous %}
+<a href="/client/historique/{{historiques.0.id}}?page=1" class='btn bg-info text-white paginator'>1</a>
+<a href="/client/historique/{{historiques.0.id}}?page={{ historiques.previous_page_number }}" class='btn bg-info text-white paginator'> < </a>
+{% endif %}
+
+<span class="current">
+Page {{ historiques.number }} sur {{ historiques.paginator.num_pages }}.
+</span>
+
+{% if historiques.has_next %}
+<a href="/client/historique/{{historiques.0.client.id}}?page={{ historiques.next_page_number }}" class='btn bg-info text-white paginator-historique'> > </a>
+<a href="/client/historique/{{historiques.0.client.id}}?page={{ historiques.paginator.num_pages }}" class='btn bg-info text-white paginator-historique'>{{ historiques.paginator.num_pages }}</a>
+{% endif %}
+</span>
+</div>
+</div>
